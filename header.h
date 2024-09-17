@@ -1,3 +1,4 @@
+
 //implement functions here
 
 struct Card{
@@ -43,10 +44,71 @@ class CardDeck{
 	}
 	void printCardsMain(){
 		Card* CurrentCard = headMain;
+		std::cout << "__________________________________" << std::endl;
 		while(CurrentCard){
 			std::cout << "(" << CurrentCard->CardS << " " << CurrentCard->CardV << ")" << "\n";
 			CurrentCard = CurrentCard->next;
 		}
+
+		std::cout << "_________________________________" << std::endl;
+	}
+
+	void ShuffleA(){
+		Card* ary1[26];
+		Card* ary2[26];
+		Card* CurrentCard;
+	
+		CurrentCard = headMain;
+
+		
+		for(size_t i = 0; i < 26; i++){
+			ary1[i] = CurrentCard;
+			CurrentCard = CurrentCard->next;
+		}
+
+
+		for(size_t j = 0; j < 26; j++){
+			ary2[j] = CurrentCard;
+			CurrentCard = CurrentCard->next;
+		}
+
+
+		for(size_t i = 0; i < 25; i++){
+			ary1[i]->next = ary2[i];
+			ary2[i]->next = ary1[i+1];
+		}
+		headMain = ary1[0];
+		ary1[25]->next = ary2[25];
+		ary2[25]->next = nullptr;
+	}
+
+	void ShuffleB(){
+		Card* ary1[26];
+		Card* ary2[26];
+		Card* CurrentCard;
+	
+		CurrentCard = headMain;
+
+		
+		for(size_t i = 0; i < 26; i++){
+			ary1[i] = CurrentCard;
+			CurrentCard = CurrentCard->next;
+		}
+
+
+		for(size_t j = 0; j < 26; j++){
+			ary2[j] = CurrentCard;
+			CurrentCard = CurrentCard->next;
+		}
+
+
+		for(size_t i = 0; i < 25; i++){
+			ary2[i]->next = ary1[i];
+			ary1[i]->next = ary2[i+1];
+		}
+		headMain = ary2[0];
+		ary2[25]->next = ary1[25];
+		ary1[25]->next = nullptr;
 	}
 };
 
